@@ -1,7 +1,7 @@
   // Family Spots Map: vollständige Offline-Grundfunktion, ohne Kartenkachel-Downloads.
-const CACHE_VERSION = "20261108-fusion-v4-ready";
+const CACHE_VERSION = "20261109-fusion-v4-about-1";
 const CACHE_PREFIX = "family-spots-map-";
-const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION + "-173-spots-v34-cohesion";
+const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION + "-173-spots-v4-about-premium";
 const ROOT = new URL("./", self.location.href);
 const ASSETS = [
   "js/ui/stroebeck-track.js",
@@ -136,6 +136,7 @@ const ASSETS = [
   "js/features/gemeinsam-erleben-rc.js",
   "css/gemeinsam-erleben-rc.css",
   "css/fsm-cohesion-v34.css",
+  "css/fsm-about-premium-v4.css",
   "assets/spots/grundschule-rethen/IMG_0412.jpeg",
   "assets/spots/grundschule-rethen/IMG_0414.jpeg",
   "assets/spots/schachplatz-stroebeck/schachplatz.webp",
@@ -209,21 +210,21 @@ const RELEASE_HASHES = {
   "css/theme.css": "1623d0ad94b1d92ba65f2777356dfab47f75d78004e82bc080cd40450fa59a2d",
   "js/filter-model.js": "1eaee4ef7c57398042071867e1444c18e3c63370174d788f6e5b563123962c2f",
   "css/map-spots.css": "0f79e62f4512a2ae9a7dc56a42dc0439d13ae20f361e76d82305b57cbb60a46c",
-  "da/index.html": "1228c4dc18f1004d929217f837017ce3679323a9616099d178c1bcd7eda3cb97",
+  "da/index.html": "22e350ea431be59f905473e2744eb0fd48c4d445e51b2966e20d8d4245dfe2ed",
   "data/i18n/da.json": "951da56127bece47feacd0b14f36bce865da645f7125ea49664d4766c1e61e41",
   "data/i18n/de.json": "db4a3703a47a36c9b3e0735da710e20f17e2b8c8fc041a60ba7ad0a7b9ad29ce",
   "data/i18n/en.json": "48e6dc58647ab76a07b38360bbd3d704e3058fbdda9c0cdb60f0e8441ed0a9b6",
   "data/play-ideas.json": "c18f791a6f9bc6490e5414f7ea4ba3e5735ef597d70235e93530f0ee1ba7dc07",
   "data/spots.json": "b94f239b40094eac0691238873e5b45fdebd9705841fa51085a5805acc444051",
-  "en/index.html": "62127aa07937c60218cbb32af111b0d9907c1980b187f7f5e577914865f684ef",
-  "index.html": "be2a01835407923c9ed9c8f07726db7d8f8c34a1f2d6615f155ffc55321cb22a",
-  "js/app.js": "81506eb0726fb19e7d945a01263b2f6b1ac2d939e60ac476a29ecf87d3547c51",
+  "en/index.html": "5739ae6a7d9ad72868edf45051c78a97c7bdb9650b90736760401d3b18db24e0",
+  "index.html": "a51889b0ebafb822fef8f11218cac7b8b1ac0fffb712d266bd998051d182fece",
+  "js/app.js": "f319baa2357133281792e6e704e89b460251e1c550402fdb7e6209a2e9b5ffee",
   "js/config.js": "d5b73ee24a85bc392458fa33a8167c9a1749d467b6f3e8fea804a8d7099fa48a",
   "js/features/personal-backup.js": "e1019180ef2046c93ee0ae7c2a9fcedec9af1375496a811f50bf81afaca61e86",
   "js/features/personal-storage.js": "32876282f17c01fcd46b08b7e8caed4e54aaa5b77052ed725fdc9b5b1b4e1f8b",
   "js/features/tilla.js": "0f6b03a39a5c05f68e24159c09ab4339074d6d1ab388452f13424b873b9496e3",
   "js/i18n.js": "16488d8e1e10270b4b9f40b2a151b52fc0edf1865fe90dee2dfbd40188d2b585",
-  "js/map.js": "9417030cd833e4a3b61420c502225e069f7370edb3a412b3a6f91b91843adddf",
+  "js/map.js": "9eae6cda02f0db0cf09dc39652b7e81eab598510c9625e6afb98b0ae7358ea71",
   "js/ui/menu.js": "87a9bd34bd2cd9a2e4510629c69932541e911522df89c322544aae0bb46e7311",
   "js/ui/spot-details.js": "7a2c868943ebd67733abab3f854510c420f0b729babb4acf79a161c6e604e684",
   "offline.html": "e3b8b124835d55406742d8fcf922f5e76d4ee2d6dac9577430fa716b83c08b6f",
@@ -257,7 +258,7 @@ const RELEASE_HASHES = {
   "css/badges.css": "368e7f67b004d7ee8a5f030312260aba6aad2a1e93d8c4235bc0cacca808f15b",
   "js/filters/tags.js": "fbea5599ad6503ccb8a2bb1da9a7d46a3d1bf5ce27afe46c8f1f280ac2ada923",
   "js/filters/logic.js": "775816b277bf8e393bc942f5782e335f038ccbaa5f01514f6e9410db085fc50f",
-  "css/styles.css": "dd57c64663886612384d2e7d6d176caf2793c1f2157fcd852c2e52e9c7f40913",
+  "css/styles.css": "4a69d5b75b0e7a91cca7956c5a8f3dc9de416c5b7fbd9bb3c11bd82566262fa6",
   "js/ui/map-fullscreen.js": "58218777034e262f8cee4b3fc9ded0c94516a836140a78199d3d23a7066618ac",
   "js/categories.js": "194787250b762a5f26f62b765bd39596f8c9da7d2a72dbdc067a3c195db63dd6",
   "js/ui/category-explorer.js": "bd30833878af0ee06336a5a154d2b0668ddd55ceaf18850b0ba121ce55b82e8d",

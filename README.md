@@ -6,8 +6,17 @@
 Family Spots Map ist eine dreisprachige, kartenbasierte Web-App für gemeinsame Familienerlebnisse. Sie hilft beim Entdecken von Ausflugsorten, beim privaten Planen von Unternehmungen und beim Bewahren von Erinnerungen – ohne eine öffentliche Social-Media-Plattform für Kinder zu sein.
 
 **Sprachen:** Deutsch · English · Dansk  
-**Produktivseite:** https://heimhafen.github.io/Family-Spots-Map/  
-**Projekt:** https://github.com/HeimHafen/Family-Spots-Map
+**V4.1-Testseite:** https://heimhafen.github.io/Family-Spots-Map-V4-Neu/  
+**Aktuelles Entwicklungs-Repository:** https://github.com/HeimHafen/Family-Spots-Map-V4-Neu  
+**Bisherige öffentliche Seite (nicht überschrieben):** https://heimhafen.github.io/Family-Spots-Map/
+
+## UI-Abgleich V4.1 – 9. November 2026
+
+**Aktuell im neuen Repository:** `20261109-fusion-v4-about-1`, entwickelt aus der hochgeladenen `Family-Spots-Map-V4-Neu-main.zip` (239 Dateien). Die „Über Family Spots Map“-Ansicht nutzt jetzt das abgestimmte V4-Landschaftsmotiv, ruhige Schriftführung und getrennte Abschnitte in DE/DA/EN. Die Startseite und ihre Interaktionen bleiben bewusst unverändert.
+
+**Hosting:** Dieses neue Repository nutzt GitHub Pages aus `main` und `/(root)`. Ein zweiter automatischer Pages-Deployment-Workflow ist deaktiviert; `ci.yml` führt die Inhalts- und Technikprüfungen aus. Die in der alten Version hinterlegten Canonical-/Open-Graph-/Sitemap-Adressen weisen während der parallelen Testphase absichtlich noch auf die bisherige öffentliche App. Vor einem späteren endgültigen Domainwechsel sind diese Metadaten gezielt neu zu setzen.
+
+**Wichtig:** Ein Push im neuen Repository ändert nicht die bisherige öffentliche Adresse. Die Live-Darstellung auf iOS/Android ist gesondert zu kontrollieren. [Kurze Importanleitung](00_START_HIER.md).
 
 ## Teststand – 8. November 2026
 

@@ -1,16 +1,28 @@
-# Family Spots Map – Start hier
+# Family Spots Map V4.1 – Einspielen ohne Neustart
 
-**Diese ZIP ist ein vollständiger, bereinigter Projektstand** (`20261108-fusion-v4-ready`). Sie enthält `index.html`, `css/`, `js/`, `assets/`, `data/` usw. direkt im Hauptverzeichnis. **Keine TXT-Austauschdateien erforderlich.**
+**Verbindliche Quelle:** `Family-Spots-Map-V4-Neu-main.zip`, Stand 09.11.2026.  
+**Neues Release:** `20261109-fusion-v4-about-1`.  
+**Repository für diesen Schritt:** `HeimHafen/Family-Spots-Map-V4-Neu`, Branch `main`.
 
-## Working Copy
+## Genau dieses bestehende Repository aktualisieren
 
-1. Deine zuletzt gezeigte Arbeitskopie hatte 71 nicht commitierte Änderungen. **Zuerst sichern; nichts ungeprüft verwerfen.**
-2. Nach der Sicherung eine **saubere Arbeitskopie** deines bereits auf GitHub gesicherten Testbranches `test/fsm-v34-details` verwenden. Die Inhalte dieser ZIP in die Repository-Wurzel importieren, nicht die ZIP-Datei als einzelne Datei und nicht einen übergeordneten Projektordner.
-3. Git-Diff kontrollieren, als **einen Commit** im Testbranch speichern und pushen, Force Push AUS.
-4. Cloudflare-Testvorschau prüfen; erst nach echten Gerätetests über `main` entscheiden.
+1. Das alte ZIP und deinen bisherigen GitHub-Stand als Sicherung aufbewahren. **Kein Repository löschen.**
+2. Das vollständige aktualisierte ZIP in der Dateien-App teilen → **Working Copy** → **Archiv entpacken**, Ziel `Family-Spots-Map-V4-Neu` (Repo-Wurzel). **Nicht** die ZIP-Datei selbst als Einzeldatei importieren.
+3. In Working Copy die Änderungsliste kontrollieren: neue Datei `css/fsm-about-premium-v4.css`, geänderte dreisprachige HTML-Einstiege, Cache-/Versionsdateien und aktualisierte Projektdokumentation. **Keine 27-MB-ZIP committen.**
+4. Commit auf lokalem `main` erstellen und per SSH zu `origin/main` pushen, **Force Push: AUS**.
+5. GitHub Pages im **neuen Repository** unter *Settings → Pages → Deploy from a branch → main → /(root)* aktiviert lassen.
+6. Neue Testadresse öffnen: https://heimhafen.github.io/Family-Spots-Map-V4-Neu/ – „Über Family Spots Map“ in DE/EN/DA kontrollieren, „Zur Karte“ ausprobieren. Echte iOS- und Android-Tests bleiben erforderlich.
 
-**Wichtig:** Entpacken löscht keine früheren Dateien im Repository. Wenn du Working Copy von alten Installationsdateien befreien möchtest, müssen wir das nach dem sicheren Abgleich als gesonderte Git-Änderung durchführen.
+Die bisherige öffentliche Adresse https://heimhafen.github.io/Family-Spots-Map/ gehört zu einem **anderen Repository** und ändert sich durch diesen Push **nicht**.
 
-**Live-Schutz:** `main` und GitHub Pages wurden hier nicht verändert.
+## Änderungen in V4.1
 
-Die genauen Änderungen und verbleibenden Risiken stehen in `00_RELEASEBERICHT_TESTSTAND.md`.
+- Der Informationsbereich verwendet die warme Landschaft, die typografische Hierarchie und die Abstände der V4-Startansicht.
+- Lange harte Zeilenumbrüche wurden durch natürliches, responsives Zeilenlayout ersetzt.
+- Sieben Informationsabschnitte pro Sprache sind in gut lesbare, warme Karten gegliedert.
+- Der „Zur Karte“-Button bleibt an der bestehenden Navigation angebunden und folgt der gewählten Sprache.
+- Informationen zu Plus-Partnerzugängen sind ausdrücklich als zukünftige Möglichkeit formuliert.
+- Offline-Cache und Release-Prüfsummen sind an diese Änderung angepasst.
+- Für die schon gewählte branchbasierte GitHub-Pages-Veröffentlichung läuft kein zweiter automatischer Deployment-Workflow mehr; CI-Prüfungen bleiben aktiv.
+
+**Unverändert:** Spotdaten und 173 IDs, Kartenoberfläche, Tilla, Herz, Filter, Plus-Freischaltlogik, Tagebuch und Kalenderdatenformate. Diese Prüfung bestätigt keine unabhängige Vor-Ort-Kontrolle der Spots.

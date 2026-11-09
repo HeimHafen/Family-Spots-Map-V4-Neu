@@ -1,3 +1,11 @@
+## Ergänzung 09.11.2026 – V4.1 About-Premium
+
+Aus dem vom Nutzer hochgeladenen `Family-Spots-Map-V4-Neu-main.zip` wurde ausschließlich die „Über“-Darstellung (DE, DA, EN) gezielt an den bestehenden Premium-Stil angeglichen. Kein Umbau von Karte, Tilla, Navigation, Filter, Spots, persönlicher Datenspeicherung oder Plus-Zugangslogik. Die Vorschau wurde mittels Chromium aus lokal eingebetteten Projekt-Styles bei 320, 390, 768 und 1280 CSS-Pixeln geprüft; dies ist **kein** vollständiger Live- oder iOS-Test. Die Projektprüfungen laufen erneut über `tools/check-project.mjs`.
+
+**Repository jetzt:** `HeimHafen/Family-Spots-Map-V4-Neu`, Branch `main`, Veröffentlichung über GitHub Pages `/(root)`; ältere Branch-/Cloudflare-Anweisungen im nachfolgenden historischen Bericht sind nicht mehr als aktueller Installationsweg zu verwenden.
+
+---
+
 # Family Spots Map – gemeinsamer Qualitätsstand V4
 
 **Release:** `20261108-fusion-v4-ready` · **Datum:** 08.11.2026 · **Zielbranch:** `test/fsm-v34-details`.
