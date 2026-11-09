@@ -200,7 +200,7 @@ async function validateImage(response, url) {
 }
 const RELEASE_HASHES = {
   "js/ui/stroebeck-track.js": "1745660b3a7bc8c09fdb711ba0f0d3b015cf4d03094cc82f06ba5e84c0888a30",
-  "js/ui/cycle-tours.js": "820538b009ac2cf2bbae2358f7b8433e752fbe751683ce7c23aea522ff84efea",
+  "js/ui/cycle-tours.js": "cab928265986127d54c5ea4224f67d5b83e7759955d8c4fdd7bc83eee8c21c56",
   "css/cycle-tours.css": "c6c144b149d886ebad6cf46594d20cccade183a7462ca9e579f08c946aaeb814",
   "css/fsm-design-system-83.css": "7d7c21c75a85ee14990749fdcf7428b9f52fe0b81a5651acb13f6045a0192b71",
   "js/ui/category-icons.js": "0349ce3a8f0350afaef0102b428ea05b5b5d8dfa1e0cf3617e713e89f7866c7d",
