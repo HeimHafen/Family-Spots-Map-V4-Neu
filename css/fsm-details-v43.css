@@ -109,6 +109,8 @@ html.fsm-polished :is(
   cursor:pointer;
   -webkit-tap-highlight-color:transparent;
 }
+/* Anchor the existing circular X decoration to its own button, not the dialog. */
+html.fsm-polished .fsm-cycle-tours header button[data-close]{position:relative!important;}
 html.fsm-polished .fsm-onboarding-hint__close{font-size:18px!important;line-height:1!important}
 /* Preserve the calendar close's absolute placement in its header. */
 html.fsm-polished #fse-overlay .fse-icon-btn{position:absolute!important;right:8px;top:calc(7px + env(safe-area-inset-top,0px))}

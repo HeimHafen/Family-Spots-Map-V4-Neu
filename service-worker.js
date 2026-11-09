@@ -1,5 +1,5 @@
   // Family Spots Map: vollständige Offline-Grundfunktion, ohne Kartenkachel-Downloads.
-const CACHE_VERSION = "20261109-calendar-v46-final";
+const CACHE_VERSION = "20261109-cycle-close-fix-1";
 const CACHE_PREFIX = "family-spots-map-";
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION + "-173-spots-v4-about-premium";
 const ROOT = new URL("./", self.location.href);
@@ -212,14 +212,14 @@ const RELEASE_HASHES = {
   "css/theme.css": "1623d0ad94b1d92ba65f2777356dfab47f75d78004e82bc080cd40450fa59a2d",
   "js/filter-model.js": "1eaee4ef7c57398042071867e1444c18e3c63370174d788f6e5b563123962c2f",
   "css/map-spots.css": "0f79e62f4512a2ae9a7dc56a42dc0439d13ae20f361e76d82305b57cbb60a46c",
-  "da/index.html": "2f636dd5695bced22bdae55e426c58c3b115df4eac9de413bd2a222a74fd1b15",
+  "da/index.html": "1753edc1420c75c6d29e54a41d928b66177b9424381be25aea96cdae2d00e62e",
   "data/i18n/da.json": "951da56127bece47feacd0b14f36bce865da645f7125ea49664d4766c1e61e41",
   "data/i18n/de.json": "db4a3703a47a36c9b3e0735da710e20f17e2b8c8fc041a60ba7ad0a7b9ad29ce",
   "data/i18n/en.json": "48e6dc58647ab76a07b38360bbd3d704e3058fbdda9c0cdb60f0e8441ed0a9b6",
   "data/play-ideas.json": "c18f791a6f9bc6490e5414f7ea4ba3e5735ef597d70235e93530f0ee1ba7dc07",
   "data/spots.json": "b94f239b40094eac0691238873e5b45fdebd9705841fa51085a5805acc444051",
-  "en/index.html": "189f2b63a258d08c99074402bea880edf965068022683d4ced047f97e7c4a55d",
-  "index.html": "673f769c61aabcacc74c3aa62446b5fb9b4cd7483186e443447db9dde6414e55",
+  "en/index.html": "e3d30d03aa2fb7f43ffa261f82a86ce5d22d3b83344f4167d2a46d959fed1a3f",
+  "index.html": "dc8f6f4aaafd47a8f489aeb59af4365855234414cec42238ab591717685e16c2",
   "js/app.js": "edca67e92ec0d6a343f47f1d527714ca5efb9a13304e43d6793b7abc7c597d46",
   "js/config.js": "d5b73ee24a85bc392458fa33a8167c9a1749d467b6f3e8fea804a8d7099fa48a",
   "js/features/personal-backup.js": "e1019180ef2046c93ee0ae7c2a9fcedec9af1375496a811f50bf81afaca61e86",
@@ -286,7 +286,7 @@ const RELEASE_HASHES = {
   "js/features/gemeinsam-erleben-rc.js": "967c0218c68e764c11e7c20b4e86e0e83635edc5625b1165fe483fb455f051af",
   "js/features/community-play.js": "594880fde127b94ad781b63fc08d234776a0eb63d1b9f1f5e2d5835b14b16a2e",
   "css/fsm-orange-actions-v41.css": "f040b7af13c26c3b9ccd5f80671e7a46688d0a4fcff7a5f768cac7ed9fa892b6",
-  "css/fsm-details-v43.css": "55a3ba9d2dd975950fe4e981f379cdc9be17c84b83719d8c334285394ff39884",
+  "css/fsm-details-v43.css": "0a260695689aafc610a98313f1252322effc1eededfcdb99b952d011fe2918b7",
   "css/gemeinsam-erleben-rc.css": "0ee997a614b739969c206c5483ee3fb961def08ada8351dd2ea1958b8eae9cac",
   "css/fsm-cohesion-v34.css": "4f5ccce83011a5657d3610e7cc02df5d43e2375246911624629d13243cef3303",
   "js/features/calendar-backup.js": "abedcb203b00ece33fcde80069fc1af5e328892f625d15edbe5818781696a359"
