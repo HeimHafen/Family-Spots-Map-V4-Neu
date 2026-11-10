@@ -1,5 +1,5 @@
 import { initCycleTours } from "./ui/cycle-tours.js";
-import { initTourenwelt } from "./ui/tourenwelt.js?v=20261110-nav-unified-compact-1";
+import { initTourenwelt } from "./ui/tourenwelt.js?v=20261110-tourtype-quickfix-1";
 // js/app.js
 // ======================================================
 // Family Spots Map – Hauptlogik
@@ -25,7 +25,7 @@ document.addEventListener("keydown", event => {
 
 import { evaluateSelection, selectShortcut, shortcutIsSelected, shortcutLabel } from "./filter-model.js";
 import { createMapToolIcon } from "./ui/map-toolbar.js";
-import { createHomeNavigation } from "./ui/home-navigation.js?v=20261110-nav-unified-compact-1";
+import { createHomeNavigation } from "./ui/home-navigation.js?v=20261110-tourtype-quickfix-1";
 import { initCommunityPlay } from "./features/community-play.js?v=20261109-details-v43";
 import { initPrivateCalendar } from "./features/gemeinsam-erleben-rc.js?v=20261109-calendar-v46-final";
 import { describeFilters } from "./ui/filter-summary.js";
@@ -94,7 +94,7 @@ import {
   updateMapStatusLanguage,
   renderMarkers,
   hasValidLatLng
-} from "./map.js?v=20261110-nav-unified-compact-1";
+} from "./map.js?v=20261110-tourtype-quickfix-1";
 
 import { initRouter } from "./router.js?v=20261109-details-v43";
 import { initToast, showToast } from "./toast.js";
