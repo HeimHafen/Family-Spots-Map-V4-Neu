@@ -19,6 +19,20 @@ export function createSpotTypeChips(spot, lang) {
   });
 }
 
+// Brand-semantic pictograms used consistently by all spot detail views.
+// Place-type pictograms come exclusively from category-icons.js (also used in filters).
+function spotSectionIcon(name, className) {
+  const paths = {
+    pin: '<path d="M20 10c0 5.8-8 12-8 12S4 15.8 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',
+    arrival: '<path d="M4 10h4l10-6v15L8 13H4Z"/><path d="m8 13 2 8h3l-2-7m10-4v4"/>'
+  };
+  const container = document.createElement('span');
+  container.className = className;
+  container.setAttribute('aria-hidden','true');
+  container.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false">${paths[name] || paths.pin}</svg>`;
+  return container;
+}
+
 export function getSpotHighlights(spot, lang, tags) {
   const seen = new Set(placeTypeLabels(spot, lang).map(label => label.trim().toLowerCase()));
   return tags.map(tag => String(tag).trim()).filter(tag => {
@@ -189,7 +203,17 @@ export function createSpotDetailsController({
       if (details.open) expandedParkingSpots.add(id); else expandedParkingSpots.delete(id);
     });
     const summary = document.createElement("summary");
-    summary.textContent = labels.title;
+    const parkingSign = document.createElement("span");
+    parkingSign.className = "fsm-parking-sign";
+    parkingSign.textContent = "P";
+    parkingSign.setAttribute("aria-hidden", "true");
+    const parkingLabel = document.createElement("span");
+    parkingLabel.textContent = labels.title;
+    const parkingArrow = document.createElement("span");
+    parkingArrow.className = "fsm-parking-chevron";
+    parkingArrow.setAttribute("aria-hidden", "true");
+    parkingArrow.textContent = "›";
+    summary.append(parkingSign, parkingLabel, parkingArrow);
     details.appendChild(summary);
     const body = document.createElement("div");
     body.className = "spot-parking__body";
@@ -624,12 +648,20 @@ export function createSpotDetailsController({
       section.className = "spot-nearby";
       const heading = document.createElement("strong");
       heading.textContent = { de: "Direkt daneben", en: "Right next door", da: "Lige ved siden af" }[currentLang];
+      heading.prepend(spotSectionIcon('pin', 'fsm-spot-heading-pin'));
       section.append(heading);
       for (const neighbor of neighbors) {
         const action = document.createElement("button");
         action.type = "button";
         action.className = "spot-nearby-link";
-        action.textContent = getSpotName(neighbor);
+        // Identical place-type SVG in detailed spot cards, filter and nearby list.
+        const typeId = getPlaceTypes(neighbor)[0] || 'other';
+        action.dataset.categoryIcon = typeId;
+        action.append(categoryIcon(typeId, 'fsm-spot-nearby-icon'));
+        const neighborTitle = document.createElement('span');
+        neighborTitle.className = 'fsm-spot-nearby-name';
+        neighborTitle.textContent = getSpotName(neighbor);
+        action.append(neighborTitle);
         action.addEventListener("click", () => openRelatedSpot(neighbor));
         section.append(action);
       }
@@ -704,6 +736,7 @@ export function createSpotDetailsController({
     arrival.className = "spot-arrival";
     const arrivalTitle = document.createElement("h3");
     arrivalTitle.textContent = { de: "Anreise", en: "Getting there", da: "Sådan kommer I frem" }[currentLang];
+    arrivalTitle.prepend(spotSectionIcon('arrival', 'fsm-spot-arrival-icon'));
     arrival.append(arrivalTitle);
     const routeUrls = getRouteUrlsForSpotFromUserLocation(spot);
 
