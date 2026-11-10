@@ -1,0 +1,147 @@
+/* Family Spots Map — freigegebene Tourenfilter-/Navigationsreferenz, 10.11.2026.
+   Kapselung: ausschließlich Tourenwelt und die bereits bestehende Hauptnavigation.
+   Keine Eingriffe in Kalender, Karte, Spots, Erinnerungen oder Plus-Logik. */
+
+/* Original navigation: same five destinations, original event handlers intact. */
+html.fsm-polished.fsm-home-nav-ready #fsm-home-nav.fsm-home-nav {
+  --fsm-slider-knob-fill:#fffaf1;
+  background:#fff9ef!important;
+  border:1px solid #e4d6c6!important;
+  border-radius:21px!important;
+  box-shadow:0 4px 17px #5e4a3030!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:2px!important;
+  padding:5px!important;
+}
+html.fsm-polished.fsm-home-nav-ready #fsm-home-nav > .fsm-home-nav__item:not([hidden]) {
+  border-radius:16px!important;
+  color:#3d2918!important;
+  font-size:clamp(10px,2.65vw,12px)!important;
+  line-height:1.18!important;
+  font-weight:690!important;
+  min-height:61px!important;
+  padding:5px 1px!important;
+}
+html.fsm-polished.fsm-home-nav-ready #fsm-home-nav > .fsm-home-nav__item[data-fsm-home-action="map"][aria-current="page"] {
+  background:#fa880f!important;
+  color:#fffdf6!important;
+  box-shadow:inset 0 0 0 1px #ffffff33!important;
+}
+html.fsm-polished.fsm-home-nav-ready #fsm-home-nav > .fsm-home-nav__item[data-fsm-home-action="filters"] > svg {
+  color:#417d16!important;
+}
+html.fsm-polished.fsm-home-nav-ready #fsm-home-nav > .fsm-home-nav__item[data-fsm-home-action="spots"] {
+  color:#3d2918!important;
+}
+html.fsm-polished.fsm-home-nav-ready #fsm-home-nav > .fsm-home-nav__item[data-fsm-home-action="spots"] > svg {
+  display:block!important;
+  color:#f88310!important;
+}
+/* Older pin-mask rules use ::before. The real SVG is now the sole icon. */
+html.fsm-polished.fsm-home-nav-ready #fsm-home-nav > .fsm-home-nav__item[data-fsm-home-action="spots"]::before {content:none!important;display:none!important;}
+html.fsm-polished.fsm-home-nav-ready #fsm-home-nav > .fsm-home-nav__item[data-fsm-home-action="diary"] > svg.fsm-daylog-heart {
+  fill:#79a91b!important;
+  stroke:#3d691c!important;
+  color:#3d691c!important;
+}
+html.fsm-polished.fsm-home-nav-ready #fsm-home-nav > .fsm-home-nav__item[data-fsm-home-action="plus"] > svg.spots-plus-crown {
+  color:#f1840e!important;
+}
+/* Selection for a different open sheet still needs visible, accessible state. */
+html.fsm-polished.fsm-home-nav-ready #fsm-home-nav > .fsm-home-nav__item:not([data-fsm-home-action="map"])[aria-current="page"] {
+  background:#e8edd9!important;
+  color:#315124!important;
+}
+
+/* The full-screen tour world retains its established search, plan and saved views. */
+.fsm-tourenwelt,.fsm-tourenfilter{--tw-ink:#3d2918;--tw-green:#64843b;--tw-green-dark:#416d21;--tw-orange:#ff8b0d;--tw-sage:#e9efca;--tw-paper:#fff7ef;--tw-line:#dbc6ae;}
+.fsm-tourenwelt .tw-header {min-height:165px;background:linear-gradient(180deg,#fcf2e8,#fff3e3);}
+.fsm-tourenwelt .tw-header h1 {font:700 clamp(23px,6.3vw,32px)/1.08 Georgia,'Times New Roman',serif;color:#3a2414;}
+.fsm-tourenwelt .tw-header>p {color:#655346;}
+.fsm-tourenwelt .tw-dock,.fsm-tourenfilter .tw-dock {
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px;align-items:stretch;
+  flex:0 0 auto;width:calc(100% - 16px);max-width:620px;margin:8px auto max(8px,env(safe-area-inset-bottom));
+  padding:5px;background:linear-gradient(180deg,#fffaf2,#fff5e9);
+  border:1px solid #f0e5d4;border-radius:19px;box-shadow:0 6px 18px #473d2e25;
+}
+.fsm-tourenwelt .tw-dock button,.fsm-tourenfilter .tw-dock button {
+  min-width:0;min-height:61px;gap:3px;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  border:0;border-radius:15px;padding:5px 0;background:transparent;
+  color:#38271c;font-size:clamp(10px,2.65vw,12px);line-height:1.12;font-weight:700;white-space:nowrap;
+}
+.fsm-tourenwelt .tw-dock button[aria-current="page"],.fsm-tourenfilter .tw-dock button[aria-current="page"]{background:#fb8910;color:#fffdf5;}
+.fsm-tourenwelt .tw-dock svg,.fsm-tourenfilter .tw-dock svg{height:23px;width:23px;flex:0 0 23px;}
+.fsm-tourenwelt .tw-dock button:nth-child(2) svg,.fsm-tourenfilter .tw-dock button:nth-child(2) svg{color:#417a1a;}
+.fsm-tourenwelt .tw-dock button:nth-child(3) svg,.fsm-tourenfilter .tw-dock button:nth-child(3) svg{color:#f68210;}
+.fsm-tourenwelt .tw-dock button:nth-child(4) svg,.fsm-tourenfilter .tw-dock button:nth-child(4) svg{color:#40701f;fill:#79a91b;}
+.fsm-tourenwelt .tw-dock button:nth-child(5) svg,.fsm-tourenfilter .tw-dock button:nth-child(5) svg{color:#ef8210;fill:#ef8210;}
+
+/* Native dialog remains in the top layer; both panel and bottom dock are usable. */
+.fsm-tourenfilter[open] {
+  position:fixed;inset:0;margin:0;border:0;padding:max(88px,calc(env(safe-area-inset-top) + 65px)) 0 0;
+  width:100vw;max-width:none;height:100dvh;max-height:none;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+  background:transparent;box-shadow:none;border-radius:0;overscroll-behavior:contain;
+}
+.fsm-tourenfilter::backdrop {background:rgba(61,49,31,.23);backdrop-filter:blur(2px);}
+.fsm-tourenfilter .tw-filter-card {
+  position:relative;flex:1 1 auto;min-height:0;min-width:0;width:calc(100% - 16px);max-width:620px;
+  border:1px solid rgba(245,236,222,.9);border-radius:25px;
+  padding:17px clamp(16px,3.8vw,27px) 14px;overflow-y:auto;scrollbar-width:thin;
+  background:linear-gradient(135deg,#fffaf2,#fff4e7 70%,#fffaf0);
+  box-shadow:0 12px 30px rgba(49,42,26,.24);
+  overscroll-behavior:contain;
+}
+.fsm-tourenfilter .tw-filter-leaves{pointer-events:none;position:absolute;top:-4px;left:-9px;width:100px;height:auto;max-height:100px;object-fit:contain;object-position:left top;}
+.fsm-tourenfilter .tw-filter-head{min-height:44px;display:flex;align-items:center;padding-left:clamp(35px,9vw,70px);}
+.fsm-tourenfilter .tw-filter-head h2{font:700 clamp(25px,6.2vw,34px)/1.13 Georgia,'Times New Roman',serif;letter-spacing:-.5px;color:#382517;white-space:normal;margin:0 47px 0 0;}
+.fsm-tourenfilter .tw-filter-lead{padding-left:clamp(35px,9vw,70px);font-size:clamp(11px,2.8vw,13px);color:#776a6e;margin:0 0 11px;}
+.fsm-tourenfilter .tw-close {position:absolute;top:1px;right:-5px;display:grid;place-items:center;width:44px;height:44px;min-height:44px;border:none;border-radius:50%;background:transparent;}
+.fsm-tourenfilter .tw-close::before{content:'';position:absolute;width:35px;height:35px;border-radius:50%;background:#f8eada;z-index:0;}
+.fsm-tourenfilter .tw-close svg{position:relative;z-index:1;width:19px;height:19px;color:#64492c;}
+.fsm-tourenfilter .tw-filter-fields{display:flex;flex-direction:column;gap:0;}
+.fsm-tourenfilter .tw-select,.fsm-tourenfilter .tw-group>span{margin:10px 0 0;display:block;color:#4a3726;font-size:10px;letter-spacing:1.5px;font-weight:800;line-height:1.25;text-transform:uppercase;}
+.fsm-tourenfilter select{appearance:auto;display:block;width:100%;min-height:44px;padding:7px 10px;margin:6px 0 0;border-radius:10px;border:1px solid #bdb4ac;background:#fffefd;color:#33281d;font-size:14px;font-weight:550;letter-spacing:0;text-transform:none;}
+.fsm-tourenfilter .tw-options{display:grid;gap:6px;margin-top:8px;}
+.fsm-tourenfilter .tw-two{grid-template-columns:repeat(2,minmax(0,1fr));}
+.fsm-tourenfilter .tw-four{grid-template-columns:repeat(4,minmax(0,1fr));}
+.fsm-tourenfilter .tw-options button{display:flex;align-items:center;justify-content:center;gap:8px;min-width:0;padding:6px 3px;border:1px solid #dac4ae;border-radius:13px;background:#fff8ed;color:#312317;font-weight:740;font-size:clamp(10.5px,2.6vw,13px);line-height:1.14;box-shadow:none;}
+.fsm-tourenfilter .tw-options button[aria-pressed="true"]{background:linear-gradient(135deg,#e9edc7,#dce8b6);border:1.5px solid #7b9851;color:#354b20;}
+.fsm-tourenfilter .tw-options svg{width:21px;height:21px;color:#3e7029;stroke-width:1.75;}
+.fsm-tourenfilter .tw-two button{min-height:49px;}
+.fsm-tourenfilter .tw-four button{min-height:79px;flex-direction:column;gap:5px;}
+.fsm-tourenfilter .tw-four svg{width:26px;height:26px;}
+.fsm-tourenfilter .tw-four button[data-length="short"] svg,.fsm-tourenfilter .tw-four button[data-length="medium"] svg,.fsm-tourenfilter .tw-four button[data-length="long"] svg{color:#fb8910;}
+.fsm-tourenfilter .tw-orange{min-height:48px;border:1px solid #fb8b10;border-radius:13px;background:#ff8b0d;margin-top:17px;color:#3d2918;font:700 clamp(16px,4vw,20px)/1.18 Georgia,'Times New Roman',serif;box-shadow:0 3px 5px #a5682824;}
+.fsm-tourenfilter .tw-filter-foot{font-size:10.5px;color:#7c6d70;text-align:center;margin:8px 4px 1px;line-height:1.25;}
+.fsm-tourenfilter .tw-dock{margin-top:9px;}
+@media(max-width:350px){
+  .fsm-tourenfilter .tw-filter-card{padding-left:11px;padding-right:11px;}
+  .fsm-tourenfilter .tw-four button{font-size:10px;min-height:74px;}
+  .fsm-tourenfilter .tw-four svg{width:22px;height:22px;}
+  .fsm-tourenwelt .tw-dock button,.fsm-tourenfilter .tw-dock button{font-size:9px;}
+}
+@media(max-height:670px){
+  .fsm-tourenfilter[open]{padding-top:max(56px,env(safe-area-inset-top));}
+  .fsm-tourenfilter .tw-filter-card{border-radius:18px;}
+}
+@media(min-width:701px){
+  .fsm-tourenfilter[open]{padding-top:8vh;}
+  .fsm-tourenfilter .tw-filter-card{flex:0 1 auto;max-height:calc(100dvh - 130px);}
+}
+@media(prefers-reduced-motion:reduce){.fsm-tourenfilter *{transition:none!important;}}
+
+/* Final rhythm at iPhone sizes: more generous touch targets, no dead blank strip. */
+@media (min-height:720px) and (max-width:700px){
+ .fsm-tourenfilter .tw-filter-card{padding-top:22px;}
+ .fsm-tourenfilter .tw-filter-head h2{font-size:clamp(26px,6.5vw,34px);}
+ .fsm-tourenfilter .tw-filter-lead{font-size:13px;margin-bottom:14px;}
+ .fsm-tourenfilter .tw-select,.fsm-tourenfilter .tw-group>span{margin-top:14px;font-size:10.5px;}
+ .fsm-tourenfilter select{min-height:47px;font-size:15px;}
+ .fsm-tourenfilter .tw-options{margin-top:9px;gap:7px;}
+ .fsm-tourenfilter .tw-options button{font-size:clamp(11px,2.9vw,13px);}
+ .fsm-tourenfilter .tw-two button{min-height:53px;}
+ .fsm-tourenfilter .tw-four button{min-height:88px;}
+ .fsm-tourenfilter .tw-orange{min-height:51px;margin-top:19px;}
+ .fsm-tourenfilter .tw-filter-foot{font-size:11px;margin-top:10px;}
+}

@@ -94,7 +94,7 @@ import {
   updateMapStatusLanguage,
   renderMarkers,
   hasValidLatLng
-} from "./map.js?v=20261110-tourenwelt-v1";
+} from "./map.js?v=20261110-touren-reference-v1";
 
 import { initRouter } from "./router.js?v=20261109-details-v43";
 import { initToast, showToast } from "./toast.js";

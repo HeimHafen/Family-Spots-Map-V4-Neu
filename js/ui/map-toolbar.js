@@ -30,6 +30,18 @@ const PATHS = {
   community: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"
 };
 export function createMapToolIcon(name) {
+  if (name === "filters") {
+    const ns = "http://www.w3.org/2000/svg";
+    const icon = document.createElementNS(ns, "svg");
+    for (const [key, value] of Object.entries({viewBox:"0 0 24 24",width:"20",height:"20",fill:"none",stroke:"currentColor","stroke-width":"1.7","stroke-linecap":"round","stroke-linejoin":"round","aria-hidden":"true",focusable:"false"})) icon.setAttribute(key,value);
+    const lines=document.createElementNS(ns,"path");lines.setAttribute("d","M3 5h18M3 12h18M3 19h18");icon.append(lines);
+    for (const [cx,cy] of [[9,5],[16,12],[10,19]]) {
+      const knob=document.createElementNS(ns,"circle");
+      knob.setAttribute("cx",cx);knob.setAttribute("cy",cy);knob.setAttribute("r","2.5");
+      knob.setAttribute("fill","var(--fsm-slider-knob-fill,#fffaf1)");icon.append(knob);
+    }
+    return icon;
+  }
   if (name === "diary") return createHeartIcon("fsm-daylog-heart");
   if (name === "plus") return createCrownIcon();
   const ns = "http://www.w3.org/2000/svg";
