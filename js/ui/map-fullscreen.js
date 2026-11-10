@@ -1,4 +1,4 @@
-import { createMapToolbar } from "./map-toolbar.js";
+import { createMapToolbar } from "./map-toolbar.js?v=20261110-touren-release-3";
 
 // One Leaflet instance, temporarily moved into a modal, viewport-sized map.
 // No browser Fullscreen API: this also works in an iPhone browser tab.

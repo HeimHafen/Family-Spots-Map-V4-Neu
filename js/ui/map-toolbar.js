@@ -119,7 +119,7 @@ export function createMapToolbar({ dialog, leaveMap, onLayout }) {
   const nav = document.createElement("nav");
   nav.className = "fsm-map-nav";
   const destinations = new Map();
-  for (const name of ["map", "filters", "spots", "plus", "diary"]) {
+  for (const name of ["map", "filters", "spots", "diary", "plus"]) {
     const el = button(name, () => { if (name !== "map") navigate(name); }, "fsm-map-tool--destination");
     if (name === "map") el.setAttribute("aria-current", "page");
     destinations.set(name, el);

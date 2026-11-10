@@ -1,6 +1,6 @@
 // Family Spots Map V84 – a single home navigation, sharing existing controls.
 // The actual filter/spot sections are moved, never copied or reimplemented.
-import { createMapToolIcon } from "./map-toolbar.js";
+import { createMapToolIcon } from "./map-toolbar.js?v=20261110-touren-release-3";
 
 const COPY = {
   de: {nav:"Hauptnavigation",map:"Karte",filters:"Filter",spots:"Spots",plus:"Spots Plus",diary:"Mein Tag",close:"Schließen",sheetFilter:"Filter einstellen",sheetSpots:"Spots ansehen"},
@@ -42,7 +42,7 @@ export function createHomeNavigation({ plusEnabled = true, diaryEnabled = true }
   let previousParent = null;
   let nextSibling = null;
 
-  for (const name of ["map", "filters", "spots", "plus", "diary"]) {
+  for (const name of ["map", "filters", "spots", "diary", "plus"]) {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "fsm-home-nav__item";
