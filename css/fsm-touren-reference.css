@@ -145,3 +145,232 @@ html.fsm-polished.fsm-home-nav-ready #fsm-home-nav > .fsm-home-nav__item:not([da
  .fsm-tourenfilter .tw-orange{min-height:51px;margin-top:19px;}
  .fsm-tourenfilter .tw-filter-foot{font-size:11px;margin-top:10px;}
 }
+
+
+/* 10.11.2026 — VERBINDLICHER NAVIGATIONS-FEINSCHLIFF
+ * Ein gemeinsames Design-Token-System für Start, Hauptkarte, Vollbildkarte,
+ * Tourenwelt und Tourenfilter. Keine Navigation ist nur per Bild nachgestellt.
+ * 44 px Mindest-Touchfläche; Außenhöhe 54 px bei Standard-Zoom.
+ * Bestehende DOM-Ereignisse, Plus-Zugang und die Daylog-Funktion bleiben erhalten.
+ */
+html.fsm-polished {
+  --fsm-unav-paper:#fff9ef;
+  --fsm-unav-border:#e4d6c6;
+  --fsm-unav-text:#3d2918;
+  --fsm-unav-orange:#fa880f;
+  --fsm-unav-filter:#417d16;
+  --fsm-unav-pin:#f88310;
+  --fsm-unav-heart:#79a91b;
+  --fsm-unav-crown:#f1840e;
+  --fsm-unav-knob:#fffaf1;
+  --fsm-unav-height:44px;
+  --fsm-unav-radius:19px;
+}
+/* Startseite / Hauptkarte / weitere Appansichten – originale Buttons, keine Kopie. */
+html.fsm-polished.fsm-home-nav-ready #fsm-home-nav.fsm-home-nav {
+  --fsm-slider-knob-fill:var(--fsm-unav-knob);
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  box-sizing:border-box!important;
+  padding:4px!important;
+  gap:2px!important;
+  min-height:0!important;
+  border:1px solid var(--fsm-unav-border)!important;
+  border-radius:var(--fsm-unav-radius)!important;
+  background:var(--fsm-unav-paper)!important;
+  box-shadow:0 4px 14px rgba(68,51,29,.17)!important;
+}
+html.fsm-polished.fsm-home-nav-ready #fsm-home-nav.fsm-home-nav > .fsm-home-nav__item:not([hidden]) {
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  align-items:center!important;
+  box-sizing:border-box!important;
+  width:100%!important;
+  height:var(--fsm-unav-height)!important;
+  min-height:var(--fsm-unav-height)!important;
+  max-height:none!important;
+  padding:2px 1px!important;
+  gap:1px!important;
+  font-size:clamp(10px,2.8vw,11px)!important;
+  line-height:1.15!important;
+  font-weight:700!important;
+  border-radius:14px!important;
+  color:var(--fsm-unav-text)!important;
+  white-space:nowrap!important;
+  text-align:center!important;
+}
+html.fsm-polished.fsm-home-nav-ready #fsm-home-nav.fsm-home-nav > .fsm-home-nav__item:not([hidden]) > svg {
+  display:block!important;
+  width:20px!important;
+  height:20px!important;
+  flex:0 0 20px!important;
+}
+html.fsm-polished.fsm-home-nav-ready #fsm-home-nav.fsm-home-nav > .fsm-home-nav__item[data-fsm-home-action="map"][aria-current="page"] {
+  background:var(--fsm-unav-orange)!important;
+  color:#fffdf6!important;
+}
+html.fsm-polished.fsm-home-nav-ready #fsm-home-nav.fsm-home-nav > .fsm-home-nav__item[data-fsm-home-action="map"][aria-current="page"] > svg { color:#fffdf6!important; }
+html.fsm-polished.fsm-home-nav-ready #fsm-home-nav.fsm-home-nav > .fsm-home-nav__item[data-fsm-home-action="filters"] > svg { color:var(--fsm-unav-filter)!important; }
+html.fsm-polished.fsm-home-nav-ready #fsm-home-nav.fsm-home-nav > .fsm-home-nav__item[data-fsm-home-action="spots"] > svg { color:var(--fsm-unav-pin)!important; }
+html.fsm-polished.fsm-home-nav-ready #fsm-home-nav.fsm-home-nav > .fsm-home-nav__item[data-fsm-home-action="spots"]::before {content:none!important;display:none!important;}
+html.fsm-polished.fsm-home-nav-ready #fsm-home-nav.fsm-home-nav > .fsm-home-nav__item[data-fsm-home-action="diary"] > svg.fsm-daylog-heart {
+  fill:var(--fsm-unav-heart)!important;
+  stroke:#3d691c!important;
+  color:#3d691c!important;
+}
+html.fsm-polished.fsm-home-nav-ready #fsm-home-nav.fsm-home-nav > .fsm-home-nav__item[data-fsm-home-action="plus"] > svg.spots-plus-crown {
+  color:var(--fsm-unav-crown)!important;
+}
+/* A selected other section retains its visual state without changing the map tile. */
+html.fsm-polished.fsm-home-nav-ready #fsm-home-nav.fsm-home-nav > .fsm-home-nav__item:not([data-fsm-home-action="map"])[aria-current="page"] {
+  color:#315124!important;
+  background:#e8edd9!important;
+}
+@media (max-width:899px) {
+  html.fsm-polished.fsm-home-nav-ready body > #fsm-home-nav.fsm-home-nav {
+    left:max(12px,env(safe-area-inset-left,0px))!important;
+    right:max(12px,env(safe-area-inset-right,0px))!important;
+    max-width:620px!important;
+  }
+}
+/* Die Vollbildkarte besitzt eine eigene Navigation; Maße und Farben sind gleich. */
+html.fsm-polished #fsm-map-fullscreen .fsm-map-nav {
+  --fsm-slider-knob-fill:var(--fsm-unav-knob);
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  box-sizing:border-box!important;
+  left:max(12px,env(safe-area-inset-left,0px))!important;
+  right:max(12px,env(safe-area-inset-right,0px))!important;
+  max-width:620px!important;
+  gap:2px!important;
+  padding:4px!important;
+  border:1px solid var(--fsm-unav-border)!important;
+  border-radius:var(--fsm-unav-radius)!important;
+  background:var(--fsm-unav-paper)!important;
+  color:var(--fsm-unav-text)!important;
+  box-shadow:0 4px 14px rgba(68,51,29,.17)!important;
+}
+html.fsm-polished #fsm-map-fullscreen .fsm-map-nav .fsm-map-tool--destination:not([hidden]) {
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-width:0!important;
+  min-height:var(--fsm-unav-height)!important;
+  height:var(--fsm-unav-height)!important;
+  max-height:none!important;
+  padding:2px 1px!important;
+  gap:1px!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  align-items:center!important;
+  border:0!important;
+  border-radius:14px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:var(--fsm-unav-text)!important;
+  font-size:clamp(10px,2.8vw,11px)!important;
+  line-height:1.15!important;
+  font-weight:700!important;
+  white-space:nowrap!important;
+}
+html.fsm-polished #fsm-map-fullscreen .fsm-map-nav .fsm-map-tool--destination:not([hidden]) > svg {
+  display:block!important;
+  width:20px!important;
+  height:20px!important;
+  flex:0 0 20px!important;
+}
+html.fsm-polished #fsm-map-fullscreen .fsm-map-nav .fsm-map-tool--destination[aria-current="page"] {
+  background:var(--fsm-unav-orange)!important;
+  color:#fffdf6!important;
+}
+html.fsm-polished #fsm-map-fullscreen .fsm-map-nav .fsm-map-tool--destination[aria-current="page"] > svg { color:#fffdf6!important; }
+html.fsm-polished #fsm-map-fullscreen .fsm-map-nav .fsm-map-tool--destination:nth-child(2) > svg { color:var(--fsm-unav-filter)!important; }
+html.fsm-polished #fsm-map-fullscreen .fsm-map-nav .fsm-map-tool--destination:nth-child(3) > svg { color:var(--fsm-unav-pin)!important; }
+html.fsm-polished #fsm-map-fullscreen .fsm-map-nav .fsm-map-tool--destination:nth-child(4) > svg.fsm-daylog-heart { color:#3d691c!important;stroke:#3d691c!important;fill:var(--fsm-unav-heart)!important; }
+html.fsm-polished #fsm-map-fullscreen .fsm-map-nav .fsm-map-tool--destination:nth-child(5) > svg.spots-plus-crown { color:var(--fsm-unav-crown)!important; }
+/* Die Tourenwelt und ihr Filter haben denselben kompakten Dock. */
+html.fsm-polished .fsm-tourenwelt .tw-dock,
+html.fsm-polished .fsm-tourenfilter .tw-dock {
+  box-sizing:border-box!important;
+  width:calc(100% - 24px)!important;
+  max-width:620px!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:2px!important;
+  margin:8px auto max(8px,env(safe-area-inset-bottom))!important;
+  padding:4px!important;
+  border:1px solid var(--fsm-unav-border)!important;
+  border-radius:var(--fsm-unav-radius)!important;
+  background:var(--fsm-unav-paper)!important;
+  box-shadow:0 4px 14px rgba(68,51,29,.17)!important;
+}
+html.fsm-polished .fsm-tourenwelt .tw-dock button,
+html.fsm-polished .fsm-tourenfilter .tw-dock button {
+  box-sizing:border-box!important;
+  width:100%!important;
+  height:var(--fsm-unav-height)!important;
+  min-height:var(--fsm-unav-height)!important;
+  padding:2px 1px!important;
+  gap:1px!important;
+  border-radius:14px!important;
+  color:var(--fsm-unav-text)!important;
+  font-size:clamp(10px,2.8vw,11px)!important;
+  font-weight:700!important;
+  line-height:1.15!important;
+  white-space:nowrap!important;
+}
+html.fsm-polished .fsm-tourenwelt .tw-dock button[aria-current="page"],
+html.fsm-polished .fsm-tourenfilter .tw-dock button[aria-current="page"] {
+  background:var(--fsm-unav-orange)!important;
+  color:#fffdf6!important;
+}
+html.fsm-polished .fsm-tourenwelt .tw-dock svg,
+html.fsm-polished .fsm-tourenfilter .tw-dock svg {
+  width:20px!important;
+  height:20px!important;
+  flex:0 0 20px!important;
+}
+html.fsm-polished .fsm-tourenwelt .tw-dock button:nth-child(2) svg,
+html.fsm-polished .fsm-tourenfilter .tw-dock button:nth-child(2) svg { color:var(--fsm-unav-filter)!important; }
+html.fsm-polished .fsm-tourenwelt .tw-dock button:nth-child(3) svg,
+html.fsm-polished .fsm-tourenfilter .tw-dock button:nth-child(3) svg { color:var(--fsm-unav-pin)!important; }
+html.fsm-polished .fsm-tourenwelt .tw-dock button:nth-child(4) svg,
+html.fsm-polished .fsm-tourenfilter .tw-dock button:nth-child(4) svg { color:#3d691c!important;stroke:#3d691c!important;fill:var(--fsm-unav-heart)!important; }
+html.fsm-polished .fsm-tourenwelt .tw-dock button:nth-child(5) svg,
+html.fsm-polished .fsm-tourenfilter .tw-dock button:nth-child(5) svg { color:var(--fsm-unav-crown)!important;fill:var(--fsm-unav-crown)!important; }
+/* Keyboard focus remains visible; no outline is removed from interactive elements. */
+
+/* Präziser Abgleich: 46 px Außenhöhe und 18 px Seitenabstand auf Mobilgeräten.
+ * Start-, Vollbild- und Tourenleiste sind damit pixelgleich dimensioniert. */
+html.fsm-polished.fsm-home-nav-ready #fsm-home-nav.fsm-home-nav,
+html.fsm-polished #fsm-map-fullscreen .fsm-map-nav,
+html.fsm-polished .fsm-tourenwelt .tw-dock,
+html.fsm-polished .fsm-tourenfilter .tw-dock {
+  padding-top:0!important;
+  padding-bottom:0!important;
+}
+@media (max-width:899px) {
+ html.fsm-polished[data-theme="light"].fsm-home-nav-ready body[data-app-view="map"] > #fsm-home-nav.fsm-home-nav,
+ html.fsm-polished.fsm-home-nav-ready body > #fsm-home-nav.fsm-home-nav {
+   left:max(18px,env(safe-area-inset-left,0px))!important;
+   right:max(18px,env(safe-area-inset-right,0px))!important;
+   max-width:620px!important;
+ }
+ html.fsm-polished #fsm-map-fullscreen .fsm-map-nav {
+   left:max(18px,env(safe-area-inset-left,0px))!important;
+   right:max(18px,env(safe-area-inset-right,0px))!important;
+ }
+ html.fsm-polished .fsm-tourenwelt .tw-dock,
+ html.fsm-polished .fsm-tourenfilter .tw-dock {
+   width:calc(100% - 36px)!important;
+ }
+}
+
+/* Accessibility: high contrast selections remain visible with OS colors. */
+@media (forced-colors:active) {
+ html.fsm-polished.fsm-home-nav-ready #fsm-home-nav > .fsm-home-nav__item[data-fsm-home-action="map"][aria-current="page"],
+ html.fsm-polished #fsm-map-fullscreen .fsm-map-nav .fsm-map-tool--destination[aria-current="page"],
+ html.fsm-polished .fsm-tourenwelt .tw-dock button[aria-current="page"],
+ html.fsm-polished .fsm-tourenfilter .tw-dock button[aria-current="page"] {
+   background:Highlight!important;color:HighlightText!important;
+   outline:1px solid HighlightText!important;outline-offset:-1px!important;
+ }
+}

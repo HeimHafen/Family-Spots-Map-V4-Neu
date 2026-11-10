@@ -1,6 +1,6 @@
 // Family Spots Map V84 – a single home navigation, sharing existing controls.
 // The actual filter/spot sections are moved, never copied or reimplemented.
-import { createMapToolIcon } from "./map-toolbar.js?v=20261110-touren-release-3";
+import { createMapToolIcon } from "./map-toolbar.js?v=20261110-nav-unified-compact-1";
 
 const COPY = {
   de: {nav:"Hauptnavigation",map:"Karte",filters:"Filter",spots:"Spots",plus:"Spots Plus",diary:"Mein Tag",close:"Schließen",sheetFilter:"Filter einstellen",sheetSpots:"Spots ansehen"},
