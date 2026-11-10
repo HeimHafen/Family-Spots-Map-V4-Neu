@@ -1,4 +1,5 @@
 import { initCycleTours } from "./ui/cycle-tours.js";
+import { initTourenwelt } from "./ui/tourenwelt.js";
 // js/app.js
 // ======================================================
 // Family Spots Map – Hauptlogik
@@ -93,7 +94,7 @@ import {
   updateMapStatusLanguage,
   renderMarkers,
   hasValidLatLng
-} from "./map.js?v=20261110-close-system-v461";
+} from "./map.js?v=20261110-tourenwelt-v1";
 
 import { initRouter } from "./router.js?v=20261109-details-v43";
 import { initToast, showToast } from "./toast.js";
@@ -140,8 +141,10 @@ initPrivateCalendar({
 
 initLanguageSwitcher();
 initSkipToSpots(closeMenu);
-initCycleTours({
+let tourenwelt;
+const existingCycleDetails = initCycleTours({
   getLanguage: () => currentLang,
+  onBackToOverview: () => tourenwelt?.open(),
   closeMenu,
   openStop: closeTours => {
     const stop = spots.find(spot => getSpotId(spot) === "platz_am_schachspiel_stroebeck");
@@ -151,6 +154,11 @@ initCycleTours({
     focusSpotOnMap(stop);
     return true;
   },
+});
+tourenwelt = initTourenwelt({
+  getLanguage: () => currentLang,
+  closeMenu,
+  openLegacyTour: country => existingCycleDetails?.openTourDetail(country),
 });
 
 // ------------------------------------------------------

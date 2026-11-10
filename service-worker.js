@@ -1,5 +1,5 @@
   // Family Spots Map: vollständige Offline-Grundfunktion, ohne Kartenkachel-Downloads.
-const CACHE_VERSION = "20261110-close-system-v461";
+const CACHE_VERSION = "20261110-tourenwelt-v1";
 const CACHE_PREFIX = "family-spots-map-";
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION + "-173-spots-v4-about-premium";
 const ROOT = new URL("./", self.location.href);
@@ -8,6 +8,9 @@ const ASSETS = [
   "js/ui/filsoe-tour.js",
   "assets/spots/filsoe/ellipse.webp",
   "js/ui/cycle-tours.js",
+  "js/ui/tourenwelt.js",
+  "css/tourenwelt.css",
+  "data/tours.json",
   "css/cycle-tours.css",
   "js/filter-model.js",
   "js/ui/filter-results.js",
@@ -182,6 +185,11 @@ async function validateData(response, url) {
   } else if (relative === "data/partners.json") {
     const codes = Array.isArray(data) ? data : data?.codes;
     if (!Array.isArray(codes) || codes.some(code => !isRecord(code))) throw new Error("Invalid partner data");
+  } else if (relative === "data/tours.json") {
+    if (!isRecord(data) || data.schemaVersion !== 1 || !Array.isArray(data.tours) ||
+        data.tours.some(tour => !isRecord(tour) || typeof tour.id !== "string" ||
+          typeof tour.country !== "string" || !isRecord(tour.title) ||
+          !Number.isFinite(tour.lengthKm))) throw new Error("Invalid tours catalogue");
   } else if (relative === "data/play-ideas.json") {
     if (!Array.isArray(data) || data.some(idea => !isRecord(idea))) throw new Error("Invalid play ideas");
   } else if (relative.startsWith("data/i18n/")) {
@@ -199,8 +207,11 @@ async function validateImage(response, url) {
   if (view.getUint32(8) !== 13 || view.getUint32(12) !== 0x49484452 || view.getUint32(16) !== size || view.getUint32(20) !== size) throw new Error(`Invalid app icon dimensions: ${relative}`);
 }
 const RELEASE_HASHES = {
+  "data/tours.json": "d98ad4d6fdddaca220147f3ee113e185010783e1db8840d3f05706db2e51b7de",
+  "css/tourenwelt.css": "25ec226bb83464ddbbba1ae12477e203ca9c325e2c62f0ba659d53b05ae04aa9",
+  "js/ui/tourenwelt.js": "63b92d1a76f6551bf2459691a7b3559c6829b5cdb920c25a10b53edc82747b9d",
   "js/ui/stroebeck-track.js": "1745660b3a7bc8c09fdb711ba0f0d3b015cf4d03094cc82f06ba5e84c0888a30",
-  "js/ui/cycle-tours.js": "cab928265986127d54c5ea4224f67d5b83e7759955d8c4fdd7bc83eee8c21c56",
+  "js/ui/cycle-tours.js": "1c6d7bcc6d4b96dfcb189876a746e9f93bf8d0967289bf1d6965dd061f93efe4",
   "css/cycle-tours.css": "c6c144b149d886ebad6cf46594d20cccade183a7462ca9e579f08c946aaeb814",
   "css/fsm-design-system-83.css": "7d7c21c75a85ee14990749fdcf7428b9f52fe0b81a5651acb13f6045a0192b71",
   "js/ui/category-icons.js": "0349ce3a8f0350afaef0102b428ea05b5b5d8dfa1e0cf3617e713e89f7866c7d",
@@ -212,21 +223,21 @@ const RELEASE_HASHES = {
   "css/theme.css": "1623d0ad94b1d92ba65f2777356dfab47f75d78004e82bc080cd40450fa59a2d",
   "js/filter-model.js": "1eaee4ef7c57398042071867e1444c18e3c63370174d788f6e5b563123962c2f",
   "css/map-spots.css": "0f79e62f4512a2ae9a7dc56a42dc0439d13ae20f361e76d82305b57cbb60a46c",
-  "da/index.html": "a8760583f7bd13aeaee0920bcb7f6a34074a9f76764faa9bcf578dbb91d5cdb1",
+  "da/index.html": "1b5fd75374effa713267aa7a58fe3c83c353aeccee33ca01c84ab369e711de71",
   "data/i18n/da.json": "951da56127bece47feacd0b14f36bce865da645f7125ea49664d4766c1e61e41",
   "data/i18n/de.json": "db4a3703a47a36c9b3e0735da710e20f17e2b8c8fc041a60ba7ad0a7b9ad29ce",
   "data/i18n/en.json": "48e6dc58647ab76a07b38360bbd3d704e3058fbdda9c0cdb60f0e8441ed0a9b6",
   "data/play-ideas.json": "c18f791a6f9bc6490e5414f7ea4ba3e5735ef597d70235e93530f0ee1ba7dc07",
   "data/spots.json": "b94f239b40094eac0691238873e5b45fdebd9705841fa51085a5805acc444051",
-  "en/index.html": "4a8aabb1a9d44f971986c8e870357fcca60af7b7a75e87f1bf86dfa03bcb9fd7",
-  "index.html": "8d2c19cd7b4242297258007aa5dc0a398a43cfc044160cbfdad1a292487ceb65",
-  "js/app.js": "a5bf5cdcda7ea3a957fa14b0e3df5a96bdbb5dcc8dd0c40c4a30d546158a5052",
+  "en/index.html": "6c84bec88fd1c55976efd99ea35d9668e67946fee4a8adbdeff6be2482cf489a",
+  "index.html": "acfd920e1763982d0b098b8c77288c78b0c94f4922066232cd53c63d72aefaf3",
+  "js/app.js": "f4ba2ce702f4ba0277ab0cf13200e50d7dd1eac183331db5eae3c2227572c83e",
   "js/config.js": "d5b73ee24a85bc392458fa33a8167c9a1749d467b6f3e8fea804a8d7099fa48a",
   "js/features/personal-backup.js": "e1019180ef2046c93ee0ae7c2a9fcedec9af1375496a811f50bf81afaca61e86",
   "js/features/personal-storage.js": "32876282f17c01fcd46b08b7e8caed4e54aaa5b77052ed725fdc9b5b1b4e1f8b",
   "js/features/tilla.js": "0f6b03a39a5c05f68e24159c09ab4339074d6d1ab388452f13424b873b9496e3",
   "js/i18n.js": "16488d8e1e10270b4b9f40b2a151b52fc0edf1865fe90dee2dfbd40188d2b585",
-  "js/map.js": "61081dfbf805f579d78e1dbab3f1edabb229bfa9f6d5a1bade153cf649c0d463",
+  "js/map.js": "0a62c413cab593e850e0de197b33d072b2060daf691ea6301c7059be64535505",
   "js/ui/menu.js": "87a9bd34bd2cd9a2e4510629c69932541e911522df89c322544aae0bb46e7311",
   "js/ui/spot-details.js": "7a2c868943ebd67733abab3f854510c420f0b729babb4acf79a161c6e604e684",
   "offline.html": "e3b8b124835d55406742d8fcf922f5e76d4ee2d6dac9577430fa716b83c08b6f",
@@ -260,7 +271,7 @@ const RELEASE_HASHES = {
   "css/badges.css": "368e7f67b004d7ee8a5f030312260aba6aad2a1e93d8c4235bc0cacca808f15b",
   "js/filters/tags.js": "fbea5599ad6503ccb8a2bb1da9a7d46a3d1bf5ce27afe46c8f1f280ac2ada923",
   "js/filters/logic.js": "775816b277bf8e393bc942f5782e335f038ccbaa5f01514f6e9410db085fc50f",
-  "css/styles.css": "eda58620e9f2efd379c97e951634e6e1b93cc9423dc0259d777ad3fcca4735c1",
+  "css/styles.css": "17a80c1e9381148b16493e813cceeb27957b740b1389ca5532f768197a565c48",
   "js/ui/map-fullscreen.js": "58218777034e262f8cee4b3fc9ded0c94516a836140a78199d3d23a7066618ac",
   "js/categories.js": "194787250b762a5f26f62b765bd39596f8c9da7d2a72dbdc067a3c195db63dd6",
   "js/ui/category-explorer.js": "bd30833878af0ee06336a5a154d2b0668ddd55ceaf18850b0ba121ce55b82e8d",

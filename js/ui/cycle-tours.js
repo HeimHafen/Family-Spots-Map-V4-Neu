@@ -45,7 +45,7 @@ const copy = {
   da: ["Cykelture og bikepacking", "Find steder at besøge på jeres næste cykeltur.", "Familiecykelture", "Bikepacking", "Tyskland", "Danmark", "På cykel til skaklandsbyen", "Ca. 23 km · Rundtur", "Fra Halberstadt til Ströbeck og tilbage.", "Der er endnu ingen ture her.", "Tilbage til oversigten", "Ruteskitse", "Oplev undervejs", "Valgfrit stop i Ströbeck", "Se den originale rute", "Eventrute fra 2025 · ProSport Harz", "Luk", "Beskåret foto"],
 };
 
-export function initCycleTours({ getLanguage, closeMenu, openStop }) {
+export function initCycleTours({ getLanguage, closeMenu, openStop, onBackToOverview }) {
   const trigger = document.getElementById("btn-cycle-tours");
   if (!trigger) return;
   const dialog = document.createElement("dialog");
@@ -115,13 +115,14 @@ export function initCycleTours({ getLanguage, closeMenu, openStop }) {
     if (focusTarget) dialog.querySelector(focusTarget)?.focus({ preventScroll: true });
   }
 
-  trigger.addEventListener("click", () => {
-    closeMenu();
-    detail = false;
+  function openTourDetail(selectedCountry = "DE") {
+    country = selectedCountry === "DK" ? "DK" : "DE";
+    type = "family";
+    detail = true;
     render();
     dialog.showModal();
-    dialog.querySelector("#cycle-tours-heading").focus();
-  });
+    dialog.querySelector("#cycle-tours-heading")?.focus({ preventScroll: true });
+  }
   dialog.addEventListener("close", () => {
     if (!document.activeElement || document.activeElement === document.body) document.getElementById("menu-toggle")?.focus({preventScroll: true});
   });
@@ -142,9 +143,10 @@ export function initCycleTours({ getLanguage, closeMenu, openStop }) {
       render("#cycle-tours-heading");
     }
     if (button.hasAttribute("data-back")) {
-      detail = false;
-      render("[data-detail]");
+      dialog.close();
+      onBackToOverview?.();
     }
     if (button.hasAttribute("data-stop") && openStop(() => dialog.close())) return;
   });
+  return { openTourDetail };
 }
