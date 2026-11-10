@@ -1,5 +1,5 @@
   // Family Spots Map: vollständige Offline-Grundfunktion, ohne Kartenkachel-Downloads.
-const CACHE_VERSION = "20261110-unity-1";
+const CACHE_VERSION = "20261110-reliability-2";
 const CACHE_PREFIX = "family-spots-map-";
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION + "-173-spots-v4-about-premium";
 const ROOT = new URL("./", self.location.href);
@@ -157,7 +157,12 @@ const ASSETS = [
   "assets/spots/zinnober/IMG_0727.jpeg",
   "assets/spots/zinnober/IMG_0750.jpeg"
 ];
+// Spot photographs are optional offline content, not prerequisites for installing a release.
+// Missing photos must never hold back a security or functionality fix.
+const CORE_ASSETS = ASSETS.filter(path => !path.startsWith("assets/spots/"));
+const OPTIONAL_ASSETS = ASSETS.filter(path => path.startsWith("assets/spots/"));
 const REQUIRED = new Set(ASSETS.map(path => new URL(path, ROOT).href));
+const OPTIONAL_URLS = new Set(OPTIONAL_ASSETS.map(path => new URL(path, ROOT).href));
 function cacheKey(value) {
   const url = new URL(typeof value === "string" ? value : value.url, ROOT);
   url.search = "";
@@ -226,21 +231,21 @@ const RELEASE_HASHES = {
   "css/theme.css": "1623d0ad94b1d92ba65f2777356dfab47f75d78004e82bc080cd40450fa59a2d",
   "js/filter-model.js": "1eaee4ef7c57398042071867e1444c18e3c63370174d788f6e5b563123962c2f",
   "css/map-spots.css": "0f79e62f4512a2ae9a7dc56a42dc0439d13ae20f361e76d82305b57cbb60a46c",
-  "da/index.html": "0042f5d6b5f2efa53edfe247f90cb983ad8d0aa56a2b36c7172c821c1d75f0aa",
+  "da/index.html": "6fa093048e2509ed2cbb6d32b60aaccb342723e25fc8629f8151e16a3c4ce679",
   "data/i18n/da.json": "951da56127bece47feacd0b14f36bce865da645f7125ea49664d4766c1e61e41",
   "data/i18n/de.json": "db4a3703a47a36c9b3e0735da710e20f17e2b8c8fc041a60ba7ad0a7b9ad29ce",
   "data/i18n/en.json": "48e6dc58647ab76a07b38360bbd3d704e3058fbdda9c0cdb60f0e8441ed0a9b6",
   "data/play-ideas.json": "c18f791a6f9bc6490e5414f7ea4ba3e5735ef597d70235e93530f0ee1ba7dc07",
   "data/spots.json": "b94f239b40094eac0691238873e5b45fdebd9705841fa51085a5805acc444051",
-  "en/index.html": "f8b084a5712843233dce991a5d573ac3f5f683fe0e149ec03f862e25e2d5c020",
-  "index.html": "11ed415c2e0bb7d41693c97e2d5f4f942f99b6f7d2609454da0808dacc5d956a",
-  "js/app.js": "d818eaa5371de522692660291ead981ba1b423481a8e524c743be3a3cb7b008a",
+  "en/index.html": "803befc639b5ece194e8ca375d23d23437da434c18996ec02e1af5ee9be1fbaf",
+  "index.html": "8939d9e023032c08ea2969faa98fe71014f2b32e663d0fdeba08a463041ae34b",
+  "js/app.js": "8cbb5c3e4d931f96c9c379cd622a2d9f74faa79b9885b7dd0b4e75da49ab6e80",
   "js/config.js": "d5b73ee24a85bc392458fa33a8167c9a1749d467b6f3e8fea804a8d7099fa48a",
   "js/features/personal-backup.js": "e1019180ef2046c93ee0ae7c2a9fcedec9af1375496a811f50bf81afaca61e86",
   "js/features/personal-storage.js": "32876282f17c01fcd46b08b7e8caed4e54aaa5b77052ed725fdc9b5b1b4e1f8b",
   "js/features/tilla.js": "0f6b03a39a5c05f68e24159c09ab4339074d6d1ab388452f13424b873b9496e3",
   "js/i18n.js": "16488d8e1e10270b4b9f40b2a151b52fc0edf1865fe90dee2dfbd40188d2b585",
-  "js/map.js": "0051a28ba271289ef2857cb76461dc72b2f4b37ac7dc4efa216306e3cf2581bd",
+  "js/map.js": "c08ed9dd2a009b2182d070f32a1515bf59894e85f711d4038b77c6e6c6630aac",
   "js/ui/menu.js": "87a9bd34bd2cd9a2e4510629c69932541e911522df89c322544aae0bb46e7311",
   "js/ui/spot-details.js": "98945421bc0a3631ef973a05a30011ecf451740e35424ac73fca2408a1215ecb",
   "offline.html": "e3b8b124835d55406742d8fcf922f5e76d4ee2d6dac9577430fa716b83c08b6f",
@@ -254,7 +259,7 @@ const RELEASE_HASHES = {
   "js/features/daylog-photos.js": "a50fe7c7a6b2f0abcbb7ec234e3df643fa2d67a0a9bb99d9424484f628fdc1e7",
   "js/features/memory-images.js": "f986395cca434c008b3363e8ae076948ddcbecea952c94cc311a40f02f312143",
   "js/features/backup-zip.js": "c9ece03d64d8a27e9ae534cd86c3e4e5028a71e815e702d50524b44ae8bbafbe",
-  "js/sw-register.js": "306d25dd00638a8ad2606cc0affa49f402043d99ed28081a2a189bb1cf037d42",
+  "js/sw-register.js": "92bb6d9e4a18283513e468468b2510f1adadf4dba49a5f4b1b5478237ae4e4bb",
   "css/components.css": "e755c5daf07350cda0b05946a0b0f6333375130565f23bc4ed5c076382da99d4",
   "css/diary.css": "7014ce6ae8934e09b58fc8d0c7906dffd1fa85a67698368e5d8b4c0842790d9f",
   "js/features/diary-view.js": "caa3f074a171135743f7876a2c3e5bf7c4b16cc7959ede0555538131423502b6",
@@ -274,7 +279,7 @@ const RELEASE_HASHES = {
   "css/badges.css": "368e7f67b004d7ee8a5f030312260aba6aad2a1e93d8c4235bc0cacca808f15b",
   "js/filters/tags.js": "fbea5599ad6503ccb8a2bb1da9a7d46a3d1bf5ce27afe46c8f1f280ac2ada923",
   "js/filters/logic.js": "775816b277bf8e393bc942f5782e335f038ccbaa5f01514f6e9410db085fc50f",
-  "css/styles.css": "e80f178628ce1b206065aa45dc45d16f477eb922f4806a0142a36189748f4506",
+  "css/styles.css": "a65ce0c4065b81379a8d8428f744b978f635e8ec49bc4c3c4ef7fd42cf35c154",
   "js/ui/map-fullscreen.js": "a7ab652087277cbb5bdb53fb2265eedf264605aa93736343e7f28dfffac63161",
   "js/categories.js": "194787250b762a5f26f62b765bd39596f8c9da7d2a72dbdc067a3c195db63dd6",
   "js/ui/category-explorer.js": "bd30833878af0ee06336a5a154d2b0668ddd55ceaf18850b0ba121ce55b82e8d",
@@ -303,8 +308,7 @@ const RELEASE_HASHES = {
   "css/fsm-details-v43.css": "42c4149cc7b9c16beaab51e20ea6baa7a31349bff97ea3ca0789a7d698866751",
   "css/gemeinsam-erleben-rc.css": "0ee997a614b739969c206c5483ee3fb961def08ada8351dd2ea1958b8eae9cac",
   "css/fsm-cohesion-v34.css": "4f5ccce83011a5657d3610e7cc02df5d43e2375246911624629d13243cef3303",
-  "js/features/calendar-backup.js": "abedcb203b00ece33fcde80069fc1af5e328892f625d15edbe5818781696a359",
-  "css/fsm-spot-unity.css": "c3677f4ce8c67ea7931d0e00eefb1b4e647ed07c534a9a8afe06adcb9c04021f"
+  "js/features/calendar-backup.js": "abedcb203b00ece33fcde80069fc1af5e328892f625d15edbe5818781696a359"
 };
 async function validateMapPresentation(response, url) {
   const relative = new URL(url, ROOT).pathname.slice(ROOT.pathname.length);
@@ -319,8 +323,8 @@ self.addEventListener("install", event => {
     const cache = await caches.open(CACHE_NAME);
     try {
       // A release is only installed if every necessary file was stored successfully.
-      for (let i = 0; i < ASSETS.length; i += 8) {
-        await Promise.all(ASSETS.slice(i, i + 8).map(async path => {
+      for (let i = 0; i < CORE_ASSETS.length; i += 8) {
+        await Promise.all(CORE_ASSETS.slice(i, i + 8).map(async path => {
           const url = new URL(path, ROOT).href;
           // GitHub Pages / Cloudflare edges can briefly serve old files after a push.
           // Retry the complete asset (including checksum validation) with a release-
@@ -350,19 +354,29 @@ self.addEventListener("install", event => {
         }));
       }
     } catch (error) { await caches.delete(CACHE_NAME); throw error; }
-    // Updates wait for explicit activation; first installation activates normally.
+    // Complete, validated program releases activate without requiring browser settings.
+    // Existing pages retain their state until the registration script can reload safely.
+    await self.skipWaiting();
   })());
 });
 self.addEventListener("activate", event => {
   event.waitUntil((async () => {
-    for (const key of await caches.keys()) {
-      if (key.startsWith(CACHE_PREFIX) && key !== CACHE_NAME) await caches.delete(key);
+    // Keep at most one preceding cache so previously downloaded spot photos still
+    // work offline. All older app shells are removed, and only the current shell
+    // is ever used for HTML, JavaScript, CSS and structured data.
+    const oldNames = (await caches.keys()).filter(key => key.startsWith(CACHE_PREFIX) && key !== CACHE_NAME);
+    const previous = oldNames.at(-1);
+    for (const key of oldNames) {
+      if (key !== previous) await caches.delete(key);
     }
     await self.clients.claim();
   })());
 });
 self.addEventListener("message", event => {
   if (event.data?.type === "SKIP_WAITING") self.skipWaiting();
+  if (event.data?.type === "GET_VERSION" && event.ports?.[0]) {
+    event.ports[0].postMessage({version:CACHE_VERSION});
+  }
 });
 self.addEventListener("fetch", event => {
   const request = event.request;
@@ -412,7 +426,37 @@ self.addEventListener("fetch", event => {
   if (!REQUIRED.has(key)) return;
   event.respondWith((async () => {
     const cache = await caches.open(CACHE_NAME);
-    // Scripts and styles remain consistent for the entire installed release.
-    return await cache.match(key) || fetch(request);
+    const current = await cache.match(key);
+    if (current) return current;
+    if (OPTIONAL_URLS.has(key)) {
+      // Photos that were previously available offline remain accessible after
+      // upgrading, without making them mandatory during the install phase.
+      for (const oldName of (await caches.keys()).filter(name => name.startsWith(CACHE_PREFIX) && name !== CACHE_NAME).reverse()) {
+        const oldPhoto = await (await caches.open(oldName)).match(key);
+        if (oldPhoto) {
+          try {
+            await validateMapPresentation(oldPhoto, key);
+            await cache.put(key, oldPhoto.clone());
+            return oldPhoto;
+          } catch { /* older image no longer matches this release */ }
+        }
+      }
+      try {
+        const response = await fetchFresh(request, 8000);
+        if (!response.ok) return response;
+        await validateMapPresentation(response, key);
+        try { await cache.put(key, response.clone()); } catch { /* low-storage: still show downloaded image */ }
+        return response;
+      } catch { return new Response("Image unavailable offline", {status:503}); }
+    }
+    // Executable application assets stay version-consistent; no silent use of
+    // obsolete resources from a preceding release.
+    try {
+      const response = await fetchFresh(request, 8000);
+      if (!response.ok) return response;
+      await validateMapPresentation(response, key);
+      await cache.put(key, response.clone());
+      return response;
+    } catch { return new Response("Required app asset unavailable", {status:503}); }
   })());
 });

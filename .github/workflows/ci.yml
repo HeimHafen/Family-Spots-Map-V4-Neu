@@ -18,5 +18,19 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22"
+      # Every commit gets one self-consistent release, generated in CI.
+      # Manual Working Copy edits no longer need checksum/version bookkeeping.
+      - name: Prepare release and refresh all integrity hashes
+        shell: bash
+        run: |
+          RELEASE="$(date -u +%Y%m%d)-commit-${GITHUB_SHA:0:12}"
+          node tools/prepare-release.mjs "$RELEASE"
+
       - name: Check syntax, JSON, translations, data and offline dependencies
         run: node tools/check-project.mjs
+
+      - name: Check update-system invariants
+        run: node tools/check-update-system.mjs
+
+      - name: Simulate offline update failures
+        run: node tools/test-update-worker.mjs
