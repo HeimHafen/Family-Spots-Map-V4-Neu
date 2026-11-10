@@ -214,7 +214,7 @@
   />
 
   <!-- App Styles -->
-  <link rel="stylesheet" href="css/styles.css?v=20261109-calendar-v46-final" />
+  <link rel="stylesheet" href="css/styles.css?v=20261110-close-system-v461" />
   <link rel="stylesheet" href="css/badges.css" />
   <link rel="stylesheet" href="css/diary.css?v=20261030-diary-3" />
 <link rel="stylesheet" href="css/interface.css?v=20261109-details-v43">
@@ -238,7 +238,19 @@
   <!-- Kalender-Design bewusst nach den älteren globalen Regeln laden. -->
   <link rel="stylesheet" href="css/gemeinsam-erleben-rc.css?v=20261109-details-v43">
   <link rel="stylesheet" href="css/fsm-orange-actions-v41.css?v=20261109-details-v43" />
-  <link rel="stylesheet" href="css/fsm-details-v43.css?v=20261109-cycle-close-fix-1" />
+  <link rel="stylesheet" href="css/fsm-details-v43.css?v=20261110-close-system-v461" />
+  <!-- Accessible close-button focus: keyboard indication without touch autofocus rings. -->
+  <script>
+    (() => {
+      const root = document.documentElement;
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Tab") root.dataset.fsmFocusModality = "keyboard";
+      }, true);
+      document.addEventListener("pointerdown", () => {
+        root.dataset.fsmFocusModality = "pointer";
+      }, { capture: true, passive: true });
+    })();
+  </script>
 </head>
 
 <body>
@@ -2004,7 +2016,7 @@
   <script src="./js/sw-register.js?v=20261109-details-v43" defer></script>
 
   <!-- App (ES-Modul) -->
-  <script type="module" src="./js/app.js?v=20261109-calendar-v46-final"></script>
+  <script type="module" src="./js/app.js?v=20261110-close-system-v461"></script>
 
   <!-- The spot list starts closed on each page load; no persistent UI preference. -->
   <script type="module">

@@ -210,3 +210,94 @@ html.fsm-polished #fse-overlay .fse-mini .fse-svg{width:16px!important;height:16
  html.fsm-polished #fse-overlay .fse-event-actions{grid-template-columns:repeat(2,minmax(0,1fr))!important}
  html.fsm-polished #fse-overlay .fse-mini{height:52px!important;min-height:52px!important;font-size:11px!important}
 }
+
+
+/* V4.6 Designfreigabe-Kandidat: Einheitliches X ohne dekorativen Kreis.
+   Nur visuelle Close-Buttons. Alle Click-Handler, Schrift-/App-Layouts unberührt. */
+html.fsm-polished :is(
+  #app-menu .app-menu-close,
+  #filter-modal #filter-modal-close,
+  #fsm-home-sheet .fsm-home-sheet__close,
+  #fsm-community-overlay .fsm-community-close,
+  #fse-overlay .fse-icon-btn,
+  #spot-detail .spot-details-actions > .spot-details-close,
+  .fsm-spot-preview__close,
+  .fsm-cycle-tours header button[data-close],
+  .fsm-onboarding-hint__close,
+  .leaflet-popup-close-button
+) {
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  outline:0!important;
+  border-radius:10px!important;
+  color:#4f4639!important;
+  width:44px!important;
+  height:44px!important;
+  min-width:44px!important;
+  min-height:44px!important;
+  padding:0!important;
+}
+html.fsm-polished :is(
+  #app-menu .app-menu-close,
+  #filter-modal #filter-modal-close,
+  #fsm-home-sheet .fsm-home-sheet__close,
+  #fsm-community-overlay .fsm-community-close,
+  #fse-overlay .fse-icon-btn,
+  #spot-detail .spot-details-actions > .spot-details-close,
+  .fsm-spot-preview__close,
+  .fsm-cycle-tours header button[data-close],
+  .fsm-onboarding-hint__close,
+  .leaflet-popup-close-button
+)::before { content:none!important;display:none!important;border:0!important;box-shadow:none!important; }
+/* Preserve accessible focus for a real keyboard, not touch/autofocus. */
+html.fsm-polished[data-fsm-focus-modality="keyboard"] :is(
+  #app-menu .app-menu-close,
+  #filter-modal #filter-modal-close,
+  #fsm-home-sheet .fsm-home-sheet__close,
+  #fsm-community-overlay .fsm-community-close,
+  #fse-overlay .fse-icon-btn,
+  #spot-detail .spot-details-actions > .spot-details-close,
+  .fsm-spot-preview__close,
+  .fsm-cycle-tours header button[data-close],
+  .fsm-onboarding-hint__close,
+  .leaflet-popup-close-button
+):focus-visible { outline:2px solid #685c51!important; outline-offset:2px!important; }
+/* Consistent visual X sizes. Text × of cycle dialog uses the same brown tone. */
+html.fsm-polished .fsm-cycle-tours header button[data-close] {
+  position:relative!important;
+  font-size:24px!important;
+  font-weight:300!important;
+  line-height:1!important;
+}
+/* The map stays legible against its busy background: same X, no ring,
+   only a soft paper surface beneath the icon. */
+html.fsm-polished #fsm-map-fullscreen .fsm-map-fullscreen-button[aria-expanded="true"] {
+  color:#4f4639!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+html.fsm-polished #fsm-map-fullscreen .fsm-map-fullscreen-button[aria-expanded="true"]::before {
+  border:0!important;
+  border-radius:9px!important;
+  background:rgba(255,249,239,.94)!important;
+  box-shadow:0 1px 4px rgba(48,36,20,.12)!important;
+}
+html.fsm-polished #fsm-map-fullscreen .fsm-map-fullscreen-button[aria-expanded="true"] svg {
+  stroke-width:1.6!important;
+}
+
+/* V4.6: programmatic focus after tapping a dialog must not paint an olive halo. */
+html.fsm-polished:not([data-fsm-focus-modality="keyboard"]) :is(
+  #app-menu .app-menu-close,
+  #filter-modal #filter-modal-close,
+  #fsm-home-sheet .fsm-home-sheet__close,
+  #fsm-community-overlay .fsm-community-close,
+  #fse-overlay .fse-icon-btn,
+  #spot-detail .spot-details-actions > .spot-details-close,
+  .fsm-spot-preview__close,
+  .fsm-cycle-tours header button[data-close],
+  .fsm-onboarding-hint__close,
+  .leaflet-popup-close-button
+):focus-visible { outline:0!important; outline-offset:0!important; box-shadow:none!important; }
