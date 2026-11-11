@@ -1,8 +1,8 @@
 {
   "application": "Family Spots Map V4-Neu",
   "repository": "HeimHafen/Family-Spots-Map-V4-Neu",
-  "release": "20261110-dualmode-1",
+  "release": "20261111-stable-1",
   "commit": "branch-main",
-  "builtAt": "2026-11-10T18:00:00Z",
-  "publicationMode": "branch-compatible"
+  "publicationMode": "branch-or-actions",
+  "builtAt": "2026-11-11T00:00:00Z"
 }
